@@ -6,6 +6,7 @@ import 'package:food_delivery_app/routing/navigations.dart';
 import 'package:food_delivery_app/ui/widgets/widgets.dart';
 import 'package:food_delivery_app/utils/enums.dart';
 import 'package:food_delivery_app/utils/extension/responsive_extension.dart';
+import 'package:geolocator/geolocator.dart';
 
 class Helpers {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -47,8 +48,36 @@ class Helpers {
       shape: const StadiumBorder(),
       behavior: SnackBarBehavior.floating,
     ));
-    print("After Snak");
+    debugPrint("After Snack");
   }
+
+  static showLocationDialog() {
+        AlertDialog(
+          title: Text("Location Services Disabled"),
+          content: Text("Please enable location services on your device to use this app."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Cancel"),
+              onPressed: () {
+                ServiceNavigation.serviceNavi.back();
+              },
+            ),
+            TextButton(
+              child: Text("Enable Location"),
+              onPressed: () {
+                ServiceNavigation.serviceNavi.back();
+                Geolocator.openLocationSettings(); // Open device location settings
+              },
+            ),
+          ],
+        );
+    Future.delayed(const Duration(seconds: 2), () {
+      ServiceNavigation.serviceNavi.back();
+    });
+
+
+  }
+
 
 
   Color? getStatusColor(String status) {

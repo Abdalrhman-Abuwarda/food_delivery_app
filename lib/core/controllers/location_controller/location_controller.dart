@@ -113,7 +113,8 @@ class LocationController extends ChangeNotifier {
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
+      Helpers.showLocationDialog();
+      // return Future.error('Location services are disabled');
     }
 
     permission = await Geolocator.checkPermission();

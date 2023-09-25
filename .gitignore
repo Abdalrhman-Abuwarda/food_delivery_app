@@ -16,7 +16,7 @@ migrate_working_dir/
 *.iws
 .idea/
 
-.env
+
 
 # We'll investigate these later in the article.
 .env.development
